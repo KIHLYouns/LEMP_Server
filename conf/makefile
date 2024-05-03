@@ -19,17 +19,15 @@ setup-lemp:
 
 	@echo "\n\033[0;34mInstalling php dependencies\033[0m"
 	apt-get install -y \
-		php-fpm \
-		php-mysql \
-		php-curl \
-		php-xml \
-		php-gd \
-		php-mbstring \
-		php-zip \
-		php-intl \
-		php-cli \
-		php-mbstring \
-		unzip \
+		php8.3-fpm \
+		php8.3-mysql \
+		php8.3-curl \
+		php8.3-xml \
+		php8.3-mbstring \
+		php8.3-zip \
+		php8.3-intl \
+		php8.3-cli \
+		php8.3-mbstring \
 		openssh-server \
 		git \
 		nano 
