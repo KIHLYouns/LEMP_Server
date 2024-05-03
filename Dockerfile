@@ -4,9 +4,7 @@ RUN apt-get update && apt-get upgrade -y
 
 RUN apt-get install -y \
     ca-certificates \
-    build-essential \
     ufw \
-    lsb-release \
     sudo \
     openssh-server \
     curl \
@@ -20,6 +18,9 @@ RUN apt-get install -y \
     software-properties-common \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get update && apt-get install make -y
+
+COPY conf/ /app
 
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 

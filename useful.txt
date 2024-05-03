@@ -1,5 +1,0 @@
-GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'default_server' WITH GRANT OPTION;
-
-FLUSH PRIVILEGES;
-
-CREATE DATABASE db
