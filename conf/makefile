@@ -60,7 +60,8 @@ setup-lemp:
 	mysql
 
 	@echo "\n\033[0;34mUpdating phpMyAdmin configuration file\033[0m"
-	sed -i "s/\$dbserver='localhost';/\$dbserver='127.0.0.1';/" /etc/phpmyadmin/config-db.php
+	sudo sed -i "s/\$dbserver='localhost';/\$dbserver='127.0.0.1';/" /etc/phpmyadmin/config-db.php
+	nano /etc/phpmyadmin/config-db.php
 
 
 
