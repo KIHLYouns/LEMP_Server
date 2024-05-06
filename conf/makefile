@@ -41,10 +41,17 @@ setup-lemp:
 	service mysql start
 
 	@echo "\n\033[0;34mInstalling phpMyAdmin\033[0m"
+	echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
 	apt-get install -y phpmyadmin
+	
 
+	sudo rm -rf /var/www
 	@echo "\n\033[0;34mCreating symlink for phpMyAdmin\033[0m"
-	ln -s /usr/share/phpmyadmin /var/www/html
+	read -p "Enter project name: " PROJECT_NAME ; \
+	read -p "Enter GitHub project repository URL: " REPO_URL ; \
+	git clone $$REPO_URL /var/www/$$PROJECT_NAME ; \
+	ln -s /usr/share/phpmyadmin /var/www/$$PROJECT_NAME ; \
+	sed -i "s/\/var\/www\/html/\/var\/www\/$$PROJECT_NAME/g" /app/default ; \
 
 	@echo "\n\033[0;34mCopying nginx configuration\033[0m"
 	cp /app/default /etc/nginx/sites-enabled/default
@@ -60,12 +67,6 @@ setup-lemp:
 	mysql
 
 	@echo "\n\033[0;34mUpdating phpMyAdmin configuration file\033[0m"
-	sudo sed -i "s/\$dbserver='localhost';/\$dbserver='127.0.0.1';/" /etc/phpmyadmin/config-db.php
-	nano /etc/phpmyadmin/config-db.php
-
-
-
-	
-	
+	sudo sed -i "s/localhost/127.0.0.1/g" /etc/phpmyadmin/config-db.php
 
 	

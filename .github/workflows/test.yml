@@ -2,8 +2,8 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches:
-      - main  # Adjust this to match your main branch name
+    paths:
+      - Dockerfile
 
 jobs:
   build:
