@@ -28,6 +28,8 @@ RUN mkdir /var/run/sshd
 
 RUN echo 'root:root' | chpasswd
 
+WORKDIR /app
+
 EXPOSE 22 80 3306
 
 CMD ["/usr/sbin/sshd", "-D"]
