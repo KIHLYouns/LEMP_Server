@@ -26,9 +26,9 @@ RUN sed -i 's/#PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/s
 
 RUN mkdir /var/run/sshd
 
-RUN echo 'root:root' | chpasswd
-
 WORKDIR /app
+
+RUN echo 'root:root' | chpasswd
 
 EXPOSE 22 80 3306
 
