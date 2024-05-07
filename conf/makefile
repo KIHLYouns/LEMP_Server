@@ -2,7 +2,7 @@ RED := \033[0;31m
 BLUE := \033[0;34m
 NC := \033[0m
 
-setup-lemp:
+setup-install:
 	@echo "\n$(RED)Setting up LEMP server\n$(NC)"
 
 	@echo "\n$(BLUE)Installing nginx$(NC)"
@@ -39,6 +39,9 @@ setup-lemp:
 	@echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
 	@apt-get install -y phpmyadmin
 	
+setup-config:
+	@echo "\n$(RED)Configuring LEMP server\n$(NC)"
+
 	@echo "\n$(BLUE)Configuring phpMyAdmin and nginx$(NC)"
 	@rm -rf /var/www
 	@read -p "Enter project name: " PROJECT_NAME ; \
@@ -60,4 +63,6 @@ setup-lemp:
 	@sudo sed -i "s/localhost/127.0.0.1/g" /etc/phpmyadmin/config-db.php
 	@nano /etc/phpmyadmin/config-db.php
 
+setup-lemp: setup-install setup-config
+	@echo "\n$(RED)LEMP server setup complete\n$(NC)"
 	
