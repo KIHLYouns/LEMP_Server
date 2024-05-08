@@ -33,3 +33,4 @@ RUN echo 'root:root' | chpasswd
 EXPOSE 22 80 3306
 
 CMD ["/usr/sbin/sshd", "-D"]
+
