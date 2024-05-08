@@ -1,5 +1,5 @@
 ALTER USER 'phpmyadmin'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
-CREATE DATABASE db;
+CREATE DATABASE IF NOT EXISTS db;
 exit
