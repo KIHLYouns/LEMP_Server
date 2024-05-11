@@ -12,9 +12,6 @@ RUN apt-get install -y \
     gnupg \
     git \
     nano \
-    net-tools \
-    iputils-ping \
-    dnsutils \
     software-properties-common \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
