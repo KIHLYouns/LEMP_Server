@@ -6,15 +6,17 @@ NC := \033[0m
 setup-install:
 	@echo "\n$(RED)Setting up LEMP server$(NC)"
 
-	@echo "\n$(BLUE)Installing nginx...$(NC)"
+	@echo "\n$(BLUE)Updating apt-get...$(NC)"
 	@apt-get update > /dev/null 2>&1
+	@echo "$(GREEN)Done$(NC)"
+
+	@echo "\n$(BLUE)Installing nginx...$(NC)"
 	@apt-get install -y nginx > /dev/null 2>&1
 	@service nginx start > /dev/null 2>&1
 	@echo "$(GREEN)Done$(NC)"
 
 	@echo "\n$(BLUE)Allowing http traffic through ufw$(NC)"
 	@ufw enable > /dev/null 2>&1
-	@ufw allow OpenSSH > /dev/null 2>&1
 	@ufw allow 'Nginx HTTP' > /dev/null 2>&1
 	@echo "$(GREEN)Done$(NC)"
 
@@ -24,7 +26,6 @@ setup-install:
 		php8.3-mysql \
 		php8.3-curl \
 		php8.3-xml \
-		php8.3-mbstring \
 		php8.3-zip \
 		php8.3-intl \
 		php8.3-cli \
@@ -52,10 +53,12 @@ setup-config:
 	@rm -rf /var/www > /dev/null 2>&1
 	@read -p "Enter project name: " PROJECT_NAME ; \
 	read -p "Enter GitHub project repository URL: " REPO_URL ; \
+	read -p "Enter server Domain name: " SERVER_DOMAIN_NAME ; \
 	git clone $$REPO_URL /var/www/$$PROJECT_NAME > /dev/null 2>&1 ; \
 	ln -s /usr/share/phpmyadmin /var/www/$$PROJECT_NAME > /dev/null 2>&1 ; \
 	cp /app/default /etc/nginx/sites-enabled/default > /dev/null 2>&1 ; \
-	sed -i "s/\/var\/www\/html/\/var\/www\/$$PROJECT_NAME/g" /etc/nginx/sites-enabled/default > /dev/null 2>&1 
+	sed -i "s/\/var\/www\/html/\/var\/www\/$$PROJECT_NAME/g" /etc/nginx/sites-enabled/default > /dev/null 2>&1 ; \
+	sed -i "s/server_name localhost;/server_name $$SERVER_DOMAIN_NAME;/g" /etc/nginx/sites-enabled/default > /dev/null 2>&1
 	@echo "$(GREEN)Done$(NC)"
 	
 	@echo "\n$(BLUE)Testing nginx$(NC)"

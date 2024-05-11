@@ -8,8 +8,8 @@ docker-build:
 	docker build -t lemp_server .
 docker-run:
 	@echo "$(PURPLE)Running docker container$(NC)"
-	docker run -it -v /Users/youns/Documents/LEMP_Server/cfg:/app -v /Users/youns/Documents/LEMP_Server/sql:/var/lib/mysql \
-	-p 80:80 -p 3306:3306 -p 2222:22 \
+	docker run -it -v $(PWD)/cfg:/app -v $(PWD)/sql:/var/lib/mysql \
+	-p 80:80 -p 3307:3306 \
 	--name LEMP --cap-add=NET_ADMIN lemp_server \
 	/bin/bash
 t:
